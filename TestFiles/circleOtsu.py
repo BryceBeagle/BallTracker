@@ -9,7 +9,7 @@ buffer = 64
 
 points = deque(maxlen=buffer)
 
-video = cv2.VideoCapture(1)
+video = cv2.VideoCapture(2)
 
 running = True
 
