@@ -1,5 +1,6 @@
 import cv2
 
+
 def circlesFromContours(contours, count, frame):
 
     count = min(count, len(contours))
@@ -9,12 +10,12 @@ def circlesFromContours(contours, count, frame):
         bearing = contours[bearingNumber]
 
         ((x, y), radius) = cv2.minEnclosingCircle(bearing)
-        M = cv2.moments(bearing)
+        moment = cv2.moments(bearing)
 
         if radius > 20:
 
             try:
-                center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+                center = (int(moment["m10"] / moment["m00"]), int(moment["m01"] / moment["m00"]))
             except ZeroDivisionError:
                 print("Zero area circle?")
                 continue
