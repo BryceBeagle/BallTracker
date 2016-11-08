@@ -5,14 +5,17 @@ def circlesFromContours(contours, count, frame):
 
     count = min(count, len(contours))
 
+    frame = cv2.erode (frame, None, iterations=2)
+    frame = cv2.dilate(frame, None, iterations=2)
+
     for bearingNumber in range(count):
 
         bearing = contours[bearingNumber]
 
-        ((x, y), radius) = cv2.minEnclosingCircle(bearing)
+        (x, y), radius = cv2.minEnclosingCircle(bearing)
         moment = cv2.moments(bearing)
 
-        if radius > 20:
+        if 10 < radius < 100:
 
             try:
                 center = (int(moment["m10"] / moment["m00"]), int(moment["m01"] / moment["m00"]))
