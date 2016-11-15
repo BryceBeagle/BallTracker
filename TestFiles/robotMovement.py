@@ -1,18 +1,36 @@
 from time import sleep
 
 from communication import CommunicationProtocol as com
+from helpers       import robot
 
-robot = com.Device('COM5')
+bot = com.Device('COM5')
 
 def wait():
-    while robot.getMoving(): sleep(.01)
+    while bot.getMoving(): sleep(.01)
 
-while True:
-    robot.setXYZ(-2.5, 15, 8, 500)
-    sleep(1)
-    robot.setXYZ(-2.5, 20, 8, 500)
-    sleep(1)
-    robot.setXYZ( 2.5, 20, 8, 500)
-    sleep(1)
-    robot.setXYZ( 2.5, 15, 8, 500)
-    sleep(1)
+base, main, scnd = robot.move(40, 130, 105)
+bot.setServo(0, base)
+bot.setServo(1, main)
+bot.setServo(2, scnd)
+
+# for x in range(10):
+#     base, main, scnd = robot.move(-25, 150, 20)
+#     bot.setServo(0, base)
+#     bot.setServo(1, main)
+#     bot.setServo(2, scnd)
+#     sleep(1)
+#     base, main, scnd = robot.move(-25, 200, 20)
+#     bot.setServo(0, base)
+#     bot.setServo(1, main)
+#     bot.setServo(2, scnd)
+#     sleep(1)
+#     base, main, scnd = robot.move( 25, 200, 20)
+#     bot.setServo(0, base)
+#     bot.setServo(1, main)
+#     bot.setServo(2, scnd)
+#     sleep(1)
+#     base, main, scnd = robot.move( 25, 150, 20)
+#     bot.setServo(0, base)
+#     bot.setServo(1, main)
+#     bot.setServo(2, scnd)
+#     sleep(1)
