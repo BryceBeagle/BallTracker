@@ -1,7 +1,7 @@
 import cv2
 import math
 
-from helpers import color, find, draw
+from helpers import find, draw, calc, distance, color
 
 video = cv2.VideoCapture(1)
 
@@ -15,23 +15,29 @@ while True:
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    yellowFrame, _ = color.isolate(hsv, *color.yellowRange)
+    yellowMarkers = find.yellow(hsv)[:2]
+    frame = draw.circlesFromContours(frame, yellowMarkers, 2)
 
-    yellowFrameDilate = cv2.erode (yellowFrame, None, iterations=2)
-    yellowFrameDilate = cv2.dilate(yellowFrameDilate, None, iterations=2)
+    marker1 = find.contourCenter(yellowMarkers[0])
+    marker2 = find.contourCenter(yellowMarkers[1])
 
-    yellowMask = cv2.split(yellowFrameDilate)[2]
+    # marker1 needs to have larger y value
+    if marker2[1] > marker1[1]:
+        temp = marker1
+        marker1 = marker2
+        marker2 = temp
 
-    yellowThresh = cv2.threshold(yellowMask, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    frame = draw.text(frame, str(marker1), *marker1)
+    frame = draw.text(frame, str(marker2), *marker2)
 
-    yellowContours = find.contours(yellowThresh.copy())
-    yellowContours = sorted(yellowContours, key=cv2.contourArea, reverse=True)
+    markerDistance = calc.distance(*marker1, *marker2)
+    mmPerPixel = distance.BETWEEN_YELLOW / markerDistance
 
-    frame = draw.circlesFromContours(frame, yellowContours, 2)
+    origin = calc.origin(*marker1, *marker2)
+
+    cv2.circle(frame, origin, 3, color.GREEN, 3)
+
     cv2.imshow("Frame",  frame)
 
-    # yellowDistance =
-
     k = cv2.waitKey(5) & 0xFF
-    if k == 27:
-        break
+    if k == 27: break
