@@ -21,7 +21,7 @@ def origin(x1, y1, x2, y2):
 
     xAve, yAve = average(x1, y1, x2, y2)
 
-    xOrig = xAve + (y1 - yAve)
-    yOrig = yAve + (x1 - xAve)
+    xOrig = int(xAve + (y1   - yAve))
+    yOrig = int(yAve + (xAve -   x1))
 
     return xOrig, yOrig
