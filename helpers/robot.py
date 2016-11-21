@@ -1,6 +1,6 @@
 from scipy.optimize import fsolve
 import math
-import numpy as np
+from helpers import distances
 
 def move(x, y, z):
 
@@ -14,6 +14,7 @@ def move(x, y, z):
 
     print(x, y)
 
+    # TODO: Use helpers.distances
     a1 = 89.214
     a2 = 148
     a3 = 160
