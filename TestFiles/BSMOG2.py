@@ -1,7 +1,6 @@
 import cv2
+from helpers import color
 import numpy as np
-
-from testFiles import colors
 
 video = cv2.VideoCapture(2)
 
@@ -20,7 +19,7 @@ while True:
 
     color = cv2.bitwise_and(frame, frame, mask=fgmask)
 
-    blue = cv2.inRange(color, *colors.blue)
+    blue = cv2.inRange(color, *color.BLUE_RANGE)
 
     # fgmask = cv2.fastNlMeansDenoising(fgmask)
 

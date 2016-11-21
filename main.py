@@ -15,6 +15,6 @@ while True:
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    blueFrame, blueMask = color.isolate(hsv, *color.blueRange)
-    redFrame,    = color.isolate(hsv, *color.redRange)
+    blueFrame, blueMask = color.isolate(hsv, *color.BLUE_RANGE)
+    redFrame,    = color.isolate(hsv, *color.RED_RANGE)
 

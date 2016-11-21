@@ -16,7 +16,7 @@ while True:
     _, frame = video.read()
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    _, blueMask = color.isolate(hsv, *color.blueRange)
+    _, blueMask = color.isolate(hsv, *color.BLUE_RANGE)
 
     # blueMask = cv2.erode (blueMask, None, iterations=2)
     # blueMask = cv2.dilate(blueMask, None, iterations=2)

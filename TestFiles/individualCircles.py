@@ -14,7 +14,7 @@ while True:
     _, frame = video.read()
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    _, blueMask = color.isolate(hsv, *color.blueRange)
+    _, blueMask = color.isolate(hsv, *color.BLUE_RANGE)
     # _, redMask  = color.isolate(hsv, *color.red)
 
     # shifted = cv2.pyrMeanShiftFiltering(blueFrame, 21, 51)

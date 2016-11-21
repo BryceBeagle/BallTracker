@@ -3,7 +3,7 @@ from collections import deque
 import cv2
 import numpy as np
 
-from testFiles import colors
+from helpers import color
 
 buffer = 64
 
@@ -19,7 +19,7 @@ while running:
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    mask = cv2.inRange(hsv, *colors.blue)
+    mask = cv2.inRange(hsv, *color.BLUE_RANGE)
 
     blur = cv2.GaussianBlur(mask, (5,5), 0)
     _, frameOtsu = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
