@@ -7,7 +7,7 @@ def distance(x1, y1, x2, y2):
     return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 
 
-# Finds average of two points
+# Average of two points
 def average(x1, y1, x2, y2):
 
     xAve = (x1 + x2) / 2
