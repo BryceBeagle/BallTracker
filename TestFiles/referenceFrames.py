@@ -15,7 +15,7 @@ while True:
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    yellowFrame, _ = color.isolate(hsv, *color.yellow)
+    yellowFrame, _ = color.isolate(hsv, *color.yellowRange)
 
     yellowFrameDilate = cv2.erode (yellowFrame, None, iterations=2)
     yellowFrameDilate = cv2.dilate(yellowFrameDilate, None, iterations=2)
@@ -27,10 +27,10 @@ while True:
     yellowContours = find.contours(yellowThresh.copy())
     yellowContours = sorted(yellowContours, key=cv2.contourArea, reverse=True)
 
-    frame = draw.circlesFromContours(yellowContours, 2, frame)
+    frame = draw.circlesFromContours(frame, yellowContours, 2)
     cv2.imshow("Frame",  frame)
 
-    # yellowDistance = math.sqrt(yellowContours)
+    # yellowDistance =
 
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
