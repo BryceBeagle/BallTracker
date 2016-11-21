@@ -2,7 +2,8 @@ import cv2
 from helpers import find, color
 
 
-def circlesFromContours(frame, contours, count):
+def circlesFromContours(frame, contours, count,
+                        outerColor=color.YELLOW, innerColor=color.RED):
 
     count = min(count, len(contours))
 
@@ -14,7 +15,13 @@ def circlesFromContours(frame, contours, count):
 
             center = find.contourCenter(contour)
 
-            cv2.circle(frame, (int(x), int(y)), int(radius), color.YELLOW, 2)
-            cv2.circle(frame, center, 5, color.RED, -1)
+            cv2.circle(frame, (int(x), int(y)), int(radius), outerColor,  2)
+            cv2.circle(frame,           center,           5, innerColor, -1)
 
+    return frame
+
+
+def text(frame, string, x, y, textColor=color.GREEN):
+
+    cv2.putText(frame, string, (x + 10, y + 10), cv2.FONT_HERSHEY_PLAIN, 2, textColor)
     return frame
