@@ -1,6 +1,5 @@
 import cv2
-from helpers import find
-
+from helpers import find, color
 
 def circlesFromContours(frame, contours, count):
 
@@ -14,7 +13,7 @@ def circlesFromContours(frame, contours, count):
 
             center = find.contourCenter(contour)
 
-            cv2.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
-            cv2.circle(frame, center, 5, (0, 0, 255), -1)
+            cv2.circle(frame, (int(x), int(y)), int(radius), color.YELLOW, 2)
+            cv2.circle(frame, center, 5, color.RED, -1)
 
     return frame
