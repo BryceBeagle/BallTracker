@@ -22,9 +22,9 @@ def contourCenter(contour):
 
 
 # Finds the yellow markers on the feet of the robot
-def yellowMarkers(frame):
+def yellow(hsv):
 
-    yellowFrame       = color.isolate(frame, *color.yellowRange)[0]
+    yellowFrame       = color.isolate(hsv, *color.yellowRange)[0]
 
     # Dilate and erode to reduce noise
     yellowFrameDilate = cv2.erode(yellowFrame, None, iterations=2)
@@ -37,4 +37,4 @@ def yellowMarkers(frame):
     yellowContours    = contours(yellowThresh.copy())
     yellowContours    = sorted(yellowContours, key=cv2.contourArea, reverse=True)
 
-    return yellowContours[0 : 1]
+    return yellowContours
