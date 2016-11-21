@@ -1,8 +1,8 @@
 import cv2
 
 redRange    = ((165, 80, 35), (180, 255, 255))
-blueRange   = ((95, 75, 35), (115, 255, 255))
-yellowRange = ((15, 75, 35), (30, 255, 255))
+blueRange   = (( 95, 75, 35), (115, 255, 255))
+yellowRange = (( 15, 75, 35), ( 30, 255, 255))
 
 
 def isolate(frame, lowerThreshold, upperThreshold):
