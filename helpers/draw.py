@@ -5,12 +5,7 @@ def circlesFromContours(contours, count, frame):
 
     count = min(count, len(contours))
 
-    frame = cv2.erode (frame, None, iterations=2)
-    frame = cv2.dilate(frame, None, iterations=2)
-
-    for bearingNumber in range(count):
-
-        bearing = contours[bearingNumber]
+    for bearing in contours[ : count]:
 
         (x, y), radius = cv2.minEnclosingCircle(bearing)
         moment = cv2.moments(bearing)
