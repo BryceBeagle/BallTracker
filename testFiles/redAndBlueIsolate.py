@@ -18,8 +18,8 @@ while True:
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    blueMask = cv2.inRange(hsv, *color.blueRange)
-    redMask  = cv2.inRange(hsv, *color.redRange)
+    blueMask = cv2.inRange(hsv, *color.BLUE_RANGE)
+    redMask  = cv2.inRange(hsv, *color.RED_RANGE)
 
     # blueMask = cv2.erode (blueMask, None, iterations=2)
     # blueMask = cv2.dilate(blueMask, None, iterations=2)
