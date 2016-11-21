@@ -1,6 +1,6 @@
 from scipy.optimize import fsolve
 import math
-from helpers import distances
+from helpers import distance
 
 def move(x, y, z):
 
