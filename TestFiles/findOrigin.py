@@ -18,7 +18,7 @@ while True:
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    yellowMarkers = find.yellow(hsv)[:2]
+    yellowMarkers = find.contourColor(hsv, color.YELLOW_RANGE)[:2]
 
     if len(yellowMarkers) == 2:
         origin = calc.origin(yellowMarkers)
