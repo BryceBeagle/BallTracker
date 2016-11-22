@@ -1,24 +1,11 @@
 import cv2
+
 from helpers import color
 
 
 def contours(mask):
 
     return cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
-
-
-# Find the center of a contour using moments
-def contourCenter(contour):
-
-    moment = cv2.moments(contour)
-
-    try:
-        center = (int(moment["m10"] / moment["m00"]), int(moment["m01"] / moment["m00"]))
-    except ZeroDivisionError:
-        print("Zero area circle?")
-        return
-
-    return center
 
 
 # Finds the yellow markers on the feet of the robot
