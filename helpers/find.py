@@ -15,14 +15,14 @@ def contourColor(hsv, colorRange):
     isolated = color.isolate(hsv, *colorRange)[0]
 
     # Dilate and erode to reduce noise
-    dilated = cv2.erode(isolated, None, iterations=2)
-    dilated = cv2.dilate(dilated, None, iterations=2)
+    dilated = cv2.erode(isolated, None, iterations=1)
+    dilated = cv2.dilate(dilated, None, iterations=1)
 
     mask = cv2.split(dilated)[2]
 
-    thresh = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    thresh = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY)[1]
 
-    colorContours = contours(thresh.copy())
+    colorContours = contours(thresh)
     colorContours = sorted(colorContours, key=cv2.contourArea, reverse=True)
 
     return colorContours
