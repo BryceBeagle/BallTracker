@@ -22,8 +22,9 @@ def average(x1, y1, x2, y2):
 # For use only with the two yellow marker contours
 def origin(yellowMarkers):
 
-    marker1 = contourCenter(yellowMarkers[0])
-    marker2 = contourCenter(yellowMarkers[1])
+    # Todo: refactor for better use with contour object
+    marker1 = contourCenterFromMoment(yellowMarkers[0].contour)
+    marker2 = contourCenterFromMoment(yellowMarkers[1].contour)
 
     # marker1 needs to have larger y value
     if marker2[1] < marker1[1]:
@@ -43,8 +44,9 @@ def origin(yellowMarkers):
 
 def pixelRatio(yellowMarkers):
 
-    marker1 = contourCenter(yellowMarkers[0])
-    marker2 = contourCenter(yellowMarkers[1])
+    # Todo: refactor for better use with contour object
+    marker1 = contourCenterFromMoment(yellowMarkers[0].contour)
+    marker2 = contourCenterFromMoment(yellowMarkers[1].contour)
 
     markerDistance = pythag(*marker1, *marker2)
 
@@ -52,7 +54,7 @@ def pixelRatio(yellowMarkers):
 
 
 # Find the center of a contour using moments
-def contourCenter(contour):
+def contourCenterFromMoment(contour):
 
     moment = cv2.moments(contour)
 
@@ -63,3 +65,30 @@ def contourCenter(contour):
         return
 
     return center
+
+
+def contourXYR(contour):
+
+    location, radius = cv2.minEnclosingCircle(contour)
+
+    return location, radius
+
+
+def pixelsToMM(pixel, ratio):
+
+    return pixel * ratio
+
+
+def coordTransformation(objX, objY, origX, origY, ratio, objZ=0, origZ=0):
+
+    objX  = pixelsToMM(objX,  ratio)
+    objY  = pixelsToMM(objY,  ratio)
+    objZ  = pixelsToMM(objZ,  ratio)
+
+    origX = pixelsToMM(origX, ratio)
+    origY = pixelsToMM(origY, ratio)
+    origZ = pixelsToMM(origZ, ratio)
+
+
+
+

@@ -1,24 +1,21 @@
 import cv2
 
-import helpers.calc
-from helpers import find, color
+from helpers import find, color, calc
 
 
 def circlesFromContours(frame, contours, count,
-                        outerColor=color.YELLOW, innerColor=color.RED):
+                        outerColor=color.YELLOW, innerColor=color.RED,
+                        minRadius=10, maxRadius=100):
 
     count = min(count, len(contours))
 
     for contour in contours[ : count]:
 
-        (x, y), radius = cv2.minEnclosingCircle(contour)
+        if minRadius < contour.radius < maxRadius:
 
-        if 10 < radius < 100:
-
-            center = helpers.calc.contourCenter(contour)
-
-            cv2.circle(frame, (int(x), int(y)), int(radius), outerColor,  2)
-            cv2.circle(frame,           center,           5, innerColor, -1)
+            center = calc.contourCenterFromMoment(contour.contour)
+            cv2.circle(frame, (int(contour.x), int(contour.y)), int(contour.radius), outerColor,  2)
+            cv2.circle(frame,                           center,                   5, innerColor, -1)
 
     return frame
 
