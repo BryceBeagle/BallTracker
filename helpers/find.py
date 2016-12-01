@@ -1,19 +1,33 @@
 import cv2
 
 from helpers import color, calc
-from objects.objects import Bearing
+from objects.objects import *
 
 
-def bearingsOfColor(hsv, colorRange):
+def bearingsOfColor(hsv, desiredColor):
 
     bearingObjects = []
-    bearings = contoursOfColor(hsv, colorRange)
+    bearings = contoursOfColor(hsv, desiredColor)
 
     for bearing in bearings:
 
-        bearingObjects.append(Bearing(bearing, color))
+        bearingObjects.append(Bearing(bearing, desiredColor))
 
     return bearingObjects
+
+
+# Todo: Merge with bearingsOfColor somehow. Duplicated code is bad
+# http://stackoverflow.com/questions/1436444/python-passing-a-class-name-as-a-parameter-to-a-function
+def markersOfColor(hsv, desiredColor):
+
+    markerObjects = []
+    markers = contoursOfColor(hsv, desiredColor)
+
+    for marker in markers:
+
+        markerObjects.append(Marker(marker, desiredColor))
+
+    return markerObjects
 
 
 def contours(mask):
@@ -22,10 +36,10 @@ def contours(mask):
 
 
 # Finds the yellow markers on the feet of the robot
-def contoursOfColor(hsv, colorRange):
+def contoursOfColor(hsv, desiredColor):
 
     # Isolate color range
-    isolated = color.isolate(hsv, *colorRange)[0]
+    isolated = color.isolate(hsv, *color.colorRanges.get(desiredColor))[0]
 
     # Dilate and erode to reduce noise
     dilated = cv2.erode(isolated, None, iterations=1)

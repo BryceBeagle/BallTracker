@@ -1,4 +1,4 @@
-Servos:
+ Servos:
 
 0: Base
    Angle 0  : 90 deg right
@@ -15,3 +15,18 @@ Servos:
 3: End-effector
    Angle 0  :
    Angle 180:
+
+
+Rotation Matrix
+
+#C-B = [ 0, -1, 0]
+#      [-1,  0, 0] OLD
+#      [ 0,  0, 1]
+
+C-B = [ cT, sT, 0]   [1,  0,  0]      [ cT, -sT,  0]
+      [-sT, cT, 0] * [0, -1,  0]    = [-sT, -cT,  0]
+      [  0,  0, 1]   [0,  0, -1]      [  0,   0, -1]
+
+B-C = [ cT, sT, 0]   [1,  0,  0]      [ cT, -sT,  0]
+      [-sT, cT, 0] * [0, -1,  0]    = [-sT, -cT,  0]
+      [  0,  0, 1]   [0,  0, -1]      [  0,   0, -1]

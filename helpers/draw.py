@@ -12,10 +12,9 @@ def circlesFromContours(frame, contours, count,
     for contour in contours[ : count]:
 
         if minRadius < contour.radius < maxRadius:
-
             center = calc.contourCenterFromMoment(contour.contour)
-            cv2.circle(frame, (int(contour.x), int(contour.y)), int(contour.radius), outerColor,  2)
-            cv2.circle(frame,                           center,                   5, innerColor, -1)
+            cv2.circle(frame, contour.location, int(contour.radius), outerColor,  2)
+            cv2.circle(frame,           center,                   5, innerColor, -1)
 
     return frame
 
